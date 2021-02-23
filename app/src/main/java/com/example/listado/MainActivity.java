@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +36,17 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerview = findViewById(R.id.recyclerView);
         LinearLayoutManager llm =new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerview.setLayoutManager(llm);
+        MyAdapter adapter = new MyAdapter(MainActivity.this, productos);
+        recyclerview.setAdapter(adapter);
 
+        Button bt_añadir = findViewById(R.id.bt_añadir);
+        Button bt_eliminar_todos = findViewById(R.id.bt_eliminarTodos);
 
+        bt_añadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
+            }
+        });
     }
 }

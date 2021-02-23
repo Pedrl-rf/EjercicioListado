@@ -16,4 +16,12 @@ public class compra {
     public void setProducto(String producto) {
         this.producto = producto;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
 }

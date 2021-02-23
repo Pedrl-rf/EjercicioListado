@@ -1,6 +1,7 @@
 package com.example.listado;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,31 +26,46 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView tv_nombre;
         private TextView tv_numero;
 
-        public MyHolder(@NonNull View itemView) {
+        public MyHolder (@NonNull View itemView) {
             super(itemView);
             tv_nombre = itemView.findViewById(R.id.tv_producto);
             tv_numero = itemView.findViewById(R.id.tv_cantidad);
         }
 
-        public void setData(String nombre, String numero) {
+        public void setData (String nombre, String numero) {
             tv_nombre.setText(nombre);
             tv_numero.setText(numero);
         }
+
+
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(context).inflate(R.layout.tarjetas, parent, false);
+        MyHolder holder = new MyHolder(v);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        MyHolder myHolder = (MyHolder) holder;
+        compra producto = listado.get(position);
 
+        String nombre = producto.getProducto();
+        String numero = String.valueOf(producto.getCantidad());
+
+        // asignamos directamente el nombre al TextView
+        //myHolder.tv_nombre.setText(nombre);
+
+        // utilizando el método de la clase MyHolder
+        myHolder.setData(nombre, numero);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listado.size();
     }
+
 }
