@@ -1,6 +1,7 @@
 package com.example.listado;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -20,7 +21,21 @@ public class MainActivity extends AppCompatActivity {
         compra producto2= new compra("Pepinillos", 2);
         compra producto3= new compra("Platanos", 1);
 
+        productos.add(producto);
+        productos.add(producto2);
+        productos.add(producto3);
+        productos.add(producto);
+        productos.add(producto2);
+        productos.add(producto3);
+        productos.add(producto);
+        productos.add(producto2);
+        productos.add(producto3);
+
         RecyclerView recyclerview = findViewById(R.id.recyclerView);
+        LinearLayoutManager llm =new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recyclerview.setLayoutManager(llm);
+
+
 
 
 
