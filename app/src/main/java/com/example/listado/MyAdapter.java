@@ -1,7 +1,9 @@
 package com.example.listado;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,23 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public MyAdapter(Context context, List<compra> listado) {
         this.context = context;
         this.listado = listado;
+    }
+
+    static class MyHolder extends RecyclerView.ViewHolder {
+
+        private TextView tv_nombre;
+        private TextView tv_numero;
+
+        public MyHolder(@NonNull View itemView) {
+            super(itemView);
+            tv_nombre = itemView.findViewById(R.id.tv_producto);
+            tv_numero = itemView.findViewById(R.id.tv_cantidad);
+        }
+
+        public void setData(String nombre, String numero) {
+            tv_nombre.setText(nombre);
+            tv_numero.setText(numero);
+        }
     }
 
     @NonNull
