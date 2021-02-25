@@ -10,15 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<compra> listado;
+    private List<Compra> listado;
 
 
-    public MyAdapter(Context context, List<compra> listado) {
+    public MyAdapter(Context context, List<Compra> listado) {
         this.context = context;
         this.listado = listado;
     }
@@ -27,13 +29,15 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private TextView tv_nombre;
         private TextView tv_numero;
-        private Button bt_borrar;
+        private FloatingActionButton bt_borrar;
+        private Button bt_eliminarTodos;
 
         public MyHolder (@NonNull View itemView) {
             super(itemView);
             tv_nombre = itemView.findViewById(R.id.tv_producto);
             tv_numero = itemView.findViewById(R.id.tv_cantidad);
-            bt_borrar = itemView.findViewById(R.id.fab_eliminar);
+            bt_borrar = itemView.findViewById(R.id.floatingActionButton);
+            bt_eliminarTodos = itemView.findViewById(R.id.bt_eliminarTodos);
         }
 
         public void setData (String nombre, String numero) {
@@ -41,8 +45,12 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_numero.setText(numero);
         }
 
-        public Button getBt_borrar() {
+        public FloatingActionButton getBt_borrar() {
             return bt_borrar;
+        }
+
+        public Button getBt_eliminarTodos(){
+            return bt_eliminarTodos;
         }
     }
 
@@ -57,7 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
-        compra producto = listado.get(position);
+        Compra producto = listado.get(position);
 
         String nombre = producto.getProducto();
         String numero = String.valueOf(producto.getCantidad());
@@ -74,8 +82,14 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 remove(myHolder.getAdapterPosition());
             }
         });
+        myHolder.getBt_eliminarTodos().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listado.clear();
+                notifyDataSetChanged();
+            }
+        });
     }
-
     @Override
     public int getItemCount() {
         return listado.size();
@@ -85,7 +99,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void update(List<compra> productos) {
+    public void update(List<Compra> productos) {
         listado.clear();
         listado = productos;
         notifyDataSetChanged();

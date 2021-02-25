@@ -1,10 +1,10 @@
 package com.example.listado;
 
-public class compra {
+public class Compra {
     String producto;
     int cantidad;
 
-    public compra(String producto, int cantidad) {
+    public Compra(String producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
     }
